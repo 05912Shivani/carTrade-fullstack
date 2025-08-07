@@ -5,7 +5,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true; // Ensure session cookies are sent
 
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
-  const response = await axios.get('http://localhost:5000/api/cart', {
+  const response = await axios.get('https://cartrade-backend-9y1g.onrender.com/api/cart', {
     withCredentials: true,
   });
   return response.data.cars || [];
@@ -19,7 +19,7 @@ export const addToCart = createAsyncThunk('cart/addToCart', async (car) => {
 });
 
 export const removeFromCart = createAsyncThunk('cart/removeFromCart', async (carId) => {
-  await axios.delete(`http://localhost:5000/api/cart/${carId}`, {
+  await axios.delete(`https://cartrade-backend-9y1g.onrender.com/api/cart/${carId}`, {
     withCredentials: true,
   });
   return carId;
