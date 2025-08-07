@@ -12,7 +12,7 @@ const AppNavbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/logout', {
+      const response = await fetch('https://cartrade-backend-9y1g.onrender.com', {
         method: 'POST',
         credentials: 'include',
       });
