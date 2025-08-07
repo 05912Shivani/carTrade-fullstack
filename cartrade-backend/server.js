@@ -48,43 +48,49 @@ require('dotenv').config();
 
 const app = express();
 
+// Parse JSON body
 app.use(express.json());
 
-// CORS setup for frontend URL
+// CORS: Allow frontend to communicate with backend
 app.use(cors({
-  origin: 'https://cartrade-frontend.onrender.com',
+  origin: 'https://cartrade-frontend.onrender.com', // frontend URL
   credentials: true,
 }));
 
-// Session middleware with MongoDB storage
+// Session Middleware with MongoDB store
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'cartrade_secret',
+  secret: process.env.SESSION_SECRET || 'fallback_secret_key',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI, // Set this in Render environment
+    mongoUrl: process.env.MONGO_URI,
     collectionName: 'sessions',
-    ttl: 14 * 24 * 60 * 60 // 14 days
+    ttl: 14 * 24 * 60 * 60, // 14 days
   }),
   cookie: {
     httpOnly: true,
-    secure: true,       // Use true because Render uses HTTPS
-    sameSite: 'none'    // Allow cross-origin
+    secure: true,       // true because Render uses HTTPS
+    sameSite: 'none',   // cross-origin allowed
   }
 }));
 
-// MongoDB connection
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB error:', err));
+}).then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Routes
+// API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/cars', require('./routes/carRoutes'));
 app.use('/api/cart', require('./routes/cartRoutes'));
 
-// Start server
+// Handle root route
+app.get('/', (req, res) => {
+  res.send('🚗 CarTrade Backend is Running!');
+});
+
+// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
