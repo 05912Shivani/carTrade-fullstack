@@ -12,7 +12,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
 });
 
 export const addToCart = createAsyncThunk('cart/addToCart', async (car) => {
-  await axios.post('http://localhost:5000/api/cart', { car }, {
+  await axios.post('https://cartrade-backend-9y1g.onrender.com/api/cart', { car }, {
   withCredentials: true,
 });
   return car;
