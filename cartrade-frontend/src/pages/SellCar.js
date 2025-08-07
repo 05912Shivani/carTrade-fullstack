@@ -23,7 +23,7 @@ const SellCar = () => {
 
   const fetchCarListings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cars', { withCredentials: true });
+      const res = await axios.get('https://cartrade-backend-9y1g.onrender.com/api/cars', { withCredentials: true });
       setCarList(res.data);
     } catch (err) {
       console.error('Error fetching car listings:', err);
@@ -41,7 +41,7 @@ const SellCar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/cars', formData, { withCredentials: true });
+      const res = await axios.post('https://cartrade-backend-9y1g.onrender.com/api/cars', formData, { withCredentials: true });
       setCarList((prev) => [...prev, res.data]);
       setSubmitted(true);
       setFormData({ owner: '',contact: '',name: '', brand: '', year: '', price: '', location: '', image: '' });
@@ -53,7 +53,7 @@ const SellCar = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/cars/${id}`, { withCredentials: true });
+      await axios.delete(`https://cartrade-backend-9y1g.onrender.com/api/cars/${id}`, { withCredentials: true });
       setCarList((prev) => prev.filter((car) => car._id !== id));
     } catch (err) {
       console.error('Error deleting car:', err);
