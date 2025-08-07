@@ -6,8 +6,8 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
 app.use(express.json());
+
 app.use(cors({
   origin: 'https://cartrade-frontend.onrender.com',
   credentials: true
@@ -24,7 +24,6 @@ app.use(session({
   }
 }));
 
-// Connect DB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -36,6 +35,5 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/cars', require('./routes/carRoutes'));
 app.use('/api/cart', require('./routes/cartRoutes'));
 
-// Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
