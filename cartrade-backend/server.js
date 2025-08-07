@@ -57,6 +57,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.set('trust proxy', 1); // 🛠️ Add this line
+
 // Session Middleware with MongoDB store
 app.use(session({
   secret: process.env.SESSION_SECRET || 'fallback_secret_key',
