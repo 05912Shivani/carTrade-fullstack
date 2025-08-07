@@ -30,7 +30,7 @@ const Login = () => {
     try {
       // Backend Login
       const res = await axios.post(
-        'https://cartrade-backend-9y1g.onrender.com',
+        'https://cartrade-backend-9y1g.onrender.com/api/auth/login',
         { email, password },
         { withCredentials: true }
       );
