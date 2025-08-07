@@ -3,6 +3,9 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const MongoStore = require('connect-mongo');
+
+app.set('trust proxy', 1); // Required for secure cookies on Render
 
 const app = express();
 
@@ -17,10 +20,15 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'cartrade_secret',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions'
+  }),
   cookie: {
     httpOnly: true,
-    secure: true,
-    sameSite: 'none'
+    secure: true,        // Required for cross-site HTTPS
+    sameSite: 'none',    // Required for cross-site cookies
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 }));
 
