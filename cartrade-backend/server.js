@@ -6,8 +6,12 @@ require('dotenv').config();
 
 const app = express();
 
+// ✅ Trust proxy (important for Render HTTPS to set secure cookies)
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(express.json());
+
 app.use(cors({
   origin: 'https://cartrade-frontend.onrender.com',
   credentials: true
@@ -17,6 +21,12 @@ app.use(session({
   secret: 'cartrade_secret',
   resave: false,
   saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,          // ✅ required for cross-site cookies (HTTPS only)
+    sameSite: 'none'       // ✅ allow cross-origin frontend
+  }
   
 }));
 
