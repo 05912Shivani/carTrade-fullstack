@@ -55,7 +55,7 @@ function App() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/auth/me', {
+        const res = await fetch('https://cartrade-backend-9y1g.onrender.com/api/auth/me', {
 
           credentials: 'include',
         });
