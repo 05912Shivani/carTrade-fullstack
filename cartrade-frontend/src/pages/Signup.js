@@ -53,7 +53,7 @@ const Signup = () => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/auth/signup',
+        'https://cartrade-backend-9y1g.onrender.com/api/auth/signup',
         form,
         { withCredentials: true }
       );
