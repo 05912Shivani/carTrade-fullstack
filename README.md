@@ -45,6 +45,7 @@ The project uses **React** for the frontend, **Node.js + Express** for the backe
 
 Frontend: https://cartrade-frontend.onrender.com
 Backend:  https://cartrade-backend-9y1g.onrender.com/
+
 🔗 API Endpoints
 Auth
 POST /api/auth/signup → Register user
