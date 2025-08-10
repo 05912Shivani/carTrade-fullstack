@@ -48,6 +48,7 @@ Frontend: https://cartrade-frontend.onrender.com
 Backend:  https://cartrade-backend-9y1g.onrender.com/
 
 🔗 API Endpoints
+
 Auth
 POST /api/auth/signup → Register user
 
@@ -59,6 +60,7 @@ GET  /api/auth/me → logged-in user  : https://cartrade-backend-9y1g.onrender.c
 
 
 Cars
+
 GET /api/cars → Get all cars (mock data or API) : https://cartrade-backend-9y1g.onrender.com/api/cars
 
 GET /api/cars/:id → Get single car details : https://cartrade-backend-9y1g.onrender.com/api/cars/:id
@@ -66,6 +68,7 @@ GET /api/cars/:id → Get single car details : https://cartrade-backend-9y1g.onr
 POST /api/cars/sell → Add new car listing
 
 Cart
+
 POST /api/cart → Add car to cart
 
 GET /api/cart → Get user cart : https://cartrade-backend-9y1g.onrender.com/api/cart
