@@ -50,6 +50,7 @@ Backend:  https://cartrade-backend-9y1g.onrender.com/
 🔗 API Endpoints
 
 Auth
+
 POST /api/auth/signup → Register user
 
 POST /api/auth/login → Login user
