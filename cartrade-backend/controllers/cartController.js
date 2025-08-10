@@ -45,15 +45,21 @@ exports.addToCart = async (req, res) => {
 
 // Remove from Cart
 exports.removeFromCart = async (req, res) => {
-  const carId = req.params.carId;
   try {
-    let cart = await Cart.findOne({ userId: req.session.userId });
-    if (cart) {
-      cart.cars = cart.cars.filter(id => id.toString() !== carId);
-      await cart.save();
+    const { carId } = req.params; // e.g. "honda_civic"
+
+    const result = await Cart.updateOne(
+      { userId: req.session.userId },
+      { $pull: { cars: { id: carId } } } // "cars" is an array of car objects
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: 'Car not found in cart' });
     }
-    res.json(cart);
+
+    res.json({ message: 'Car removed from cart successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error removing from cart' });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
-};
+};   
