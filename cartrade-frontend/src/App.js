@@ -62,7 +62,8 @@ function App() {
         });
         const data = await res.json();
         if (res.ok && data.user) {
-          dispatch(login(data.user));
+          // dispatch(login(data.user));
+          dispatch(setUserFromStorage(data.user));
           // localStorage.setItem('userInfo', JSON.stringify(data.user)); // Optional for future
         }
       } catch (error) {
