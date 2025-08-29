@@ -47,8 +47,7 @@ import Footer from './components/Footer';
 import SellCar from './pages/SellCar';
 import ServicesPage from './pages/ServicesPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { login } from './redux/slices/authSlice';
-import { setUserFromStorage } from './redux/slices/authSlice';  // 👈 login ki jagah ye import karo
+import { login } from './redux/slices/authSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -62,9 +61,8 @@ function App() {
         });
         const data = await res.json();
         if (res.ok && data.user) {
-          // dispatch(login(data.user));
-          dispatch(setUserFromStorage(data.user));
-          // localStorage.setItem('userInfo', JSON.stringify(data.user)); // Optional for future
+          dispatch(login(data.user));
+          localStorage.setItem('userInfo', JSON.stringify(data.user)); // Optional for future
         }
       } catch (error) {
         console.error('Auto-login failed:', error);
